@@ -113,7 +113,7 @@ drawWorld (MakeWorld board (Player name hp (x,y))) = do
 	refresh
 
 hasWon :: World -> Bool
-hasWon (MakeWorld board (Player _ _ (x,y))) = board !! x !! y == Goal
+hasWon (MakeWorld board (Player _ _ (x,y))) = board !! y !! x == Goal
 
 gameLoop :: Int -> World -> IO World
 gameLoop n w  
