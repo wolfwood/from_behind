@@ -100,11 +100,11 @@ randomNum :: Int -> Int -> StdGen -> IO (Int, StdGen)
 randomNum min max gen = return $ runState (randomGen min max) gen
 
 
-act :: World -> Key -> IO World
+act :: World -> Key -> World
 act (World board items p) i  
-    | board !! yi !! xi == Wall = return $ World board items p
-		| itemList /= [] = return $ World board (items \\ itemList) (useItems (p {playerPos = (xi, yi)}))
-    | otherwise = return $ World board items (p { playerPos = (xi, yi)} )
+    | board !! yi !! xi == Wall = World board items p
+		| itemList /= [] = World board (items \\ itemList) (useItems (p {playerPos = (xi, yi)}))
+    | otherwise = World board items (p { playerPos = (xi, yi)} )
     where
 	x = fst $ playerPos p
 	y = snd $ playerPos p
@@ -157,7 +157,7 @@ gameLoop n w
 	| otherwise = do 
 		-- grab a key, do something with it
 		i <- getCh
-		w' <- act w i
+		let w' = act w i
 		drawWorld w'
 		gameLoop (n + 1) w' 
 		where
