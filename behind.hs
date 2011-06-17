@@ -125,8 +125,8 @@ act (World board items p) i
       checkBounds b (x, y) = (min (max x 0) ((length (b !! 0)) - 1), min (max y 0) ((length b) - 1))
       checkItem :: (Int, Int) -> Item -> Bool
       checkItem (playerX, playerY) (Item name (x,y) _)
-	  | (x == playerX) && (y == playerY) = True
-	  | otherwise = False 
+          | (x == playerX) && (y == playerY) = True
+          | otherwise = False 
 
 drawWorld :: World -> IO ()
 drawWorld (World board items (Player name hp (x,y) _ w)) = do
@@ -148,8 +148,8 @@ drawWorld (World board items (Player name hp (x,y) _ w)) = do
 	drawItems xs
       drawItem :: Item -> IO ()
       drawItem (Item name (x,y) _) = do
-	move (y+1) x
-	wAddStr stdScr "!"
+        move (y+1) x
+        wAddStr stdScr "!"
 
 gameLoop :: Int -> World -> IO World
 gameLoop n w  
